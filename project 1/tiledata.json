@@ -1,0 +1,29 @@
+{
+	
+		
+		"forest":{
+			"mesh_name":"forest.obj",
+			"mesh_rotation":0,
+			"valid_neigbours":["forest","plains","mountain"]
+			
+		},
+		"plains":{
+			"mesh_name":"plains.obj",
+			"mesh_rotation":0,
+			"valid_neigbours":["forest","plains"]
+			
+		},
+		"mountain":{
+			"mesh_name":"mountain.obj",
+			"mesh_rotation":0,
+			"valid_neigbours":["forest","mountain"]
+			
+		}
+		
+		
+			
+		
+	
+		
+
+}

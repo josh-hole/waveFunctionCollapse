@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://by6l8qspeykjm"]
+
+[ext_resource type="Script" path="res://wfc.gd" id="1_nfwt2"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dml67"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_nfwt2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.273625, 0, 0, 0, 4.73812, 0, 0, 0, 0.341143, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_dml67")
+skeleton = NodePath("../visualiastion/Camera3D")
+
+[node name="visualiastion" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.935838, 0.35243, 0, -0.35243, 0.935838, -4.76837e-07, 3.01217, 5.96215)
+
+[node name="Camera3D" type="Camera3D" parent="visualiastion"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="visualiastion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71773, 0.641044, -7.05648)

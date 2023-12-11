@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b86y1svyep4t4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i0agc"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_mlck4"]
+
+[node name="player" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_i0agc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_mlck4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.524575, 0, 0, 0, 0.997091, 0, 0, 0, 0.527667, 0, 0.501174, 0)
+mesh = SubResource("SphereMesh_mlck4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(0.458616, 0, 0, 0, 0.999999, 0, 0, 0, 0.53882, 0, -0.445727, 0)
+mesh = SubResource("SphereMesh_mlck4")
