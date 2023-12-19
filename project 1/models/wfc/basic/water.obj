@@ -1,6 +1,6 @@
 # Blender v2.93.0 OBJ File: ''
 # www.blender.org
-mtllib plains.mtl
+mtllib water.mtl
 o Cube
 v 1.000000 1.000000 -1.000000
 v 1.000000 1.000000 1.000000

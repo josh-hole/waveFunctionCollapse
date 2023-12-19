@@ -10,13 +10,19 @@
 		"plains":{
 			"mesh_name":"plains.obj",
 			"mesh_rotation":0,
-			"valid_neigbours":["forest","plains"]
+			"valid_neigbours":["forest","plains","water"]
 			
 		},
 		"mountain":{
 			"mesh_name":"mountain.obj",
 			"mesh_rotation":0,
 			"valid_neigbours":["forest","mountain"]
+			
+		},
+		"water":{
+			"mesh_name":"water.obj",
+			"mesh_rotation":0,
+			"valid_neigbours":["water","plains"]
 			
 		}
 		

@@ -15,9 +15,13 @@ mesh = SubResource("CapsuleMesh_dml67")
 skeleton = NodePath("../visualiastion/Camera3D")
 
 [node name="visualiastion" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.935838, 0.35243, 0, -0.35243, 0.935838, -4.76837e-07, 3.01217, 5.96215)
+transform = Transform3D(1, 0, 0, 0, 0.999379, 0.0352312, 0, -0.0352312, 0.999379, 14.4831, 3.01217, 5.96215)
 
 [node name="Camera3D" type="Camera3D" parent="visualiastion"]
+transform = Transform3D(1, 0, 0, 0, 0.890444, 0.455094, 0, -0.455094, 0.890444, -1.68495, 6.15537, 22.249)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="visualiastion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71773, 0.641044, -7.05648)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="visualiastion"]
+transform = Transform3D(1, 0, 0, 0, 0.0895723, 0.995981, 0, -0.995981, 0.0895723, -6.3356, 8.71687, 3.83287)
