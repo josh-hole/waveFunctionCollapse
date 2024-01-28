@@ -118,16 +118,50 @@ func wfc_iterate():
 		return true
 		#if its not complete we go through it again
 	else:
-		
+		#get the lowest entropy tile, and collapse it
 		var lowestEntropyTile = tilesArray[lowestPos[0]][lowestPos[1]][lowestPos[2]]
-		
-		
 		var meshInstance = lowestEntropyTile.get_node("MeshInstance3D")
 		
-		if meshInstance.possibilities.size() !=0:
-			var collapsedOutcome = meshInstance.possibilities[randi()%meshInstance.possibilities.size()]
-			meshInstance.possibilities = [collapsedOutcome]
 		
+		
+		#get total weight of all possible tiles
+		var totalWeight =0
+		for p in meshInstance.possibilities:
+			totalWeight += tilesData[p]["weight"]
+		
+		
+		# get the index with respect to tile weights
+		
+		if totalWeight !=0:
+			
+			var randomIndex = randi()%int(totalWeight)
+			print (randomIndex)
+			
+			
+			var collapsedOutcome = null# = meshInstance.possibilities[randomID]
+			var currentPoss = 0
+			for p in meshInstance.possibilities:
+				
+				randomIndex -= tilesData[p]["weight"]
+				if randomIndex < 0:
+					collapsedOutcome = p
+					print (p)
+					break
+					
+				
+				
+				
+			if collapsedOutcome == null:
+				printerr("null tile generated")
+				
+			
+			
+			
+			#var collapsedOutcome = meshInstance.possibilities[randomID]
+			
+			meshInstance.possibilities = [collapsedOutcome]
+			
+				
 			var newMesh = load("res://models/wfc/basic/" + tilesData[collapsedOutcome]["mesh_name"])
 			meshInstance.nodeType = collapsedOutcome
 		
@@ -184,7 +218,7 @@ func wfc_iterate():
 						if not(newPoss in possibleNeighbours):#make sure its not in there already; no duplicates!
 							possibleNeighbours.append(newPoss)
 				
-				print(possibleNeighbours)
+				#print(possibleNeighbours)
 				
 				#loop proper
 				var changed = false
@@ -206,7 +240,7 @@ func wfc_iterate():
 				# add to the stack since it changed and needs its neigbours to be checked
 				# if it didnt change, the we dont need to wory :)
 				if changed:
-					print("---")
+					#print("---")
 					stack.append(currentOff)
 					
 						

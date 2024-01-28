@@ -4,25 +4,29 @@
 		"forest":{
 			"mesh_name":"forest.obj",
 			"mesh_rotation":0,
-			"valid_neigbours":["forest","plains","mountain"]
+			"valid_neigbours":["forest","plains","mountain"],
+			"weight":5,
 			
 		},
 		"plains":{
 			"mesh_name":"plains.obj",
 			"mesh_rotation":0,
-			"valid_neigbours":["forest","plains","water"]
+			"valid_neigbours":["forest","plains","water"],
+			"weight":5,
 			
 		},
 		"mountain":{
 			"mesh_name":"mountain.obj",
 			"mesh_rotation":0,
-			"valid_neigbours":["forest","mountain"]
+			"valid_neigbours":["forest","mountain"],
+			"weight":1,
 			
 		},
 		"water":{
 			"mesh_name":"water.obj",
 			"mesh_rotation":0,
-			"valid_neigbours":["water","plains"]
+			"valid_neigbours":["water","plains"],
+			"weight":1,
 			
 		}
 		
