@@ -1,6 +1,7 @@
 extends MeshInstance3D
 
 var possibilities = []
+var themes = {"basic":10}
 var nodeType = null
 
 # Called when the node enters the scene tree for the first time.

@@ -5,30 +5,46 @@
 			"mesh_name":"forest.obj",
 			"mesh_rotation":0,
 			"valid_neigbours":["forest","plains","mountain"],
-			"weight":5,
+			"weight":30,
 			
 		},
 		"plains":{
 			"mesh_name":"plains.obj",
 			"mesh_rotation":0,
-			"valid_neigbours":["forest","plains","water"],
-			"weight":5,
+			"valid_neigbours":["forest","plains","water","sand"],
+			"weight":40,
 			
 		},
 		"mountain":{
 			"mesh_name":"mountain.obj",
 			"mesh_rotation":0,
 			"valid_neigbours":["forest","mountain"],
-			"weight":1,
+			"weight":10,
 			
 		},
 		"water":{
 			"mesh_name":"water.obj",
 			"mesh_rotation":0,
-			"valid_neigbours":["water","plains"],
-			"weight":1,
+			"valid_neigbours":["water","plains","sand"],
+			"weight":30,
 			
-		}
+		},
+		
+		"sand":{
+			"mesh_name":"sand.obj",
+			"mesh_rotation":0,
+			"valid_neigbours":["water","plains","sand","shrub",],
+			"weight":10000000,
+			
+		},
+		
+		"shrub":{
+			"mesh_name":"shrub.obj",
+			"mesh_rotation":0,
+			"valid_neigbours":["sand"],
+			"weight":60,
+			
+		},
 		
 		
 			

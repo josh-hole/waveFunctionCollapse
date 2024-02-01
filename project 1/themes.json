@@ -1,0 +1,27 @@
+{
+	
+		
+		"basic":{
+			
+			"valid_tiles":["forest","plains","mountain","water"],
+			
+		},
+		"desert":{
+			
+			"valid_tiles":["sand"],
+			
+		},
+		"scrub":{
+			
+			"valid_tiles":["sand","scrub"],
+			
+		},
+		
+		"ocean":{
+			"valid_tiles":["sand","water"],
+		}
+		
+		
+		
+
+}

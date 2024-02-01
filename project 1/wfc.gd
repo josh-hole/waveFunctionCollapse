@@ -1,6 +1,8 @@
 extends Node
 
 var tilesData
+var themeData
+
 var tilesArray =[]
 
 const tileScn = preload("res://wave_function_tile.tscn")
@@ -19,7 +21,8 @@ const bounds=[24,1,24]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	tilesData = loadData()
+	tilesData = loadData("tiledata.json")
+	themeData = loadData("themes.json")
 	
 	
 	
@@ -40,8 +43,33 @@ func _ready():
 				add_child( zArr[z] )
 				
 				#add wfc data to tile
-				for tileType in tilesData.keys():
-					zArr[z].get_node("MeshInstance3D").possibilities.append(tileType)
+				
+				#loop throught all tiles to see if they can be added
+				for tileType in tilesData.keys():	
+									
+					#make sure they adhere to the theme tho
+					var valid = false
+					#check if tile is in it's themes					
+					#loop throught all themes
+					for theme in themeData:						
+						# does the tile have that theme???
+						#print(theme)
+						#print(zArr[z].get_node("MeshInstance3D").themes)
+						if zArr[z].get_node("MeshInstance3D").themes.has(theme):
+							
+							#and is the possible tile in said theme
+							print(tileType)
+							print(themeData[theme]["valid_tiles"])
+							if tileType in themeData[theme]["valid_tiles"]:
+								#then we allow it
+								valid = true
+								print("validdddd!!!!!!!!!!!!!!!!!!!!!!!")
+							
+					if valid:
+						zArr[z].get_node("MeshInstance3D").possibilities.append(tileType)
+						
+				#while true:
+					#var a = 1
 				
 				
 			yArr.append(zArr)
@@ -52,9 +80,8 @@ func _ready():
 	
 	
 
-func loadData():
-	var filePath = "tiledata.json"
-		
+func loadData(filePath):
+	
 	
 	var fileText = FileAccess.get_file_as_string(filePath)
 	var tileDict = JSON.parse_string(fileText) 
@@ -215,6 +242,8 @@ func wfc_iterate():
 				
 				for possi in currentTile.get_node("MeshInstance3D").possibilities:
 					for newPoss in tilesData[possi]["valid_neigbours"]:
+						
+						
 						if not(newPoss in possibleNeighbours):#make sure its not in there already; no duplicates!
 							possibleNeighbours.append(newPoss)
 				
