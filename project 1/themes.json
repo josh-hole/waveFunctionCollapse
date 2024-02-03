@@ -6,6 +6,13 @@
 			"valid_tiles":["forest","plains","mountain","water"],
 			
 		},
+		
+		"woods":{
+			
+			"valid_tiles":["forest","plains","mountain"],
+			
+		},
+		
 		"desert":{
 			
 			"valid_tiles":["sand"],

@@ -38,9 +38,21 @@ func _ready():
 				var instance = tileScn.instantiate()
 				
 				
+				
 				zArr.append(instance)
 				zArr[z].position = Vector3(x,y,z)
 				add_child( zArr[z] )
+				
+				
+				#zArr[z].get_node("MeshInstance3D").themes = {"woods":x, "desert":(bounds[0]-x)}
+				
+				#zArr[z].get_node("MeshInstance3D").themes = {"desert":x, "woods":(bounds[0]-x)}
+				#zArr[z].get_node("MeshInstance3D").themes = {"scrub":x, "desert":(bounds[0]-x)}
+				
+				#if x>12:
+				#	zArr[z].get_node("MeshInstance3D").themes =  {"woods":x}
+				#else:
+				#	zArr[z].get_node("MeshInstance3D").themes =  {"desert":(bounds[0]-x)}
 				
 				#add wfc data to tile
 				
@@ -53,6 +65,7 @@ func _ready():
 					#loop throught all themes
 					for theme in themeData:						
 						# does the tile have that theme???
+						
 						#print(theme)
 						#print(zArr[z].get_node("MeshInstance3D").themes)
 						if zArr[z].get_node("MeshInstance3D").themes.has(theme):
@@ -63,7 +76,7 @@ func _ready():
 							if tileType in themeData[theme]["valid_tiles"]:
 								#then we allow it
 								valid = true
-								print("validdddd!!!!!!!!!!!!!!!!!!!!!!!")
+								#print("valid tile!")
 							
 					if valid:
 						zArr[z].get_node("MeshInstance3D").possibilities.append(tileType)
@@ -83,7 +96,7 @@ func _ready():
 func loadData(filePath):
 	
 	
-	var fileText = FileAccess.get_file_as_string(filePath)
+	var fileText = FileAccess.get_file_as_string(filePath) 
 	var tileDict = JSON.parse_string(fileText) 
 	
 	
@@ -154,7 +167,17 @@ func wfc_iterate():
 		#get total weight of all possible tiles
 		var totalWeight =0
 		for p in meshInstance.possibilities:
-			totalWeight += tilesData[p]["weight"]
+			
+			#account for theme weighting
+			var themeWeight = 0
+			for t in themeData:	
+				if meshInstance.themes.has(t):
+					
+					if p in themeData[t]["valid_tiles"]:
+						themeWeight += meshInstance.themes[t]
+					
+					
+			totalWeight += tilesData[p]["weight"]*themeWeight
 		
 		
 		# get the index with respect to tile weights
@@ -169,7 +192,12 @@ func wfc_iterate():
 			var currentPoss = 0
 			for p in meshInstance.possibilities:
 				
-				randomIndex -= tilesData[p]["weight"]
+				var themeWeight = 0
+				for t in themeData:				
+					if meshInstance.themes.has(t):
+						themeWeight += meshInstance.themes[t]
+				
+				randomIndex -= tilesData[p]["weight"]*themeWeight#TODO: multiply weights by the weight of all themes they are in
 				if randomIndex < 0:
 					collapsedOutcome = p
 					print (p)

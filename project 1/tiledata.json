@@ -12,14 +12,14 @@
 			"mesh_name":"plains.obj",
 			"mesh_rotation":0,
 			"valid_neigbours":["forest","plains","water","sand"],
-			"weight":40,
+			"weight":70,
 			
 		},
 		"mountain":{
 			"mesh_name":"mountain.obj",
 			"mesh_rotation":0,
 			"valid_neigbours":["forest","mountain"],
-			"weight":10,
+			"weight":30,
 			
 		},
 		"water":{
@@ -34,7 +34,7 @@
 			"mesh_name":"sand.obj",
 			"mesh_rotation":0,
 			"valid_neigbours":["water","plains","sand","shrub",],
-			"weight":10000000,
+			"weight":100,
 			
 		},
 		
