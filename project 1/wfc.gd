@@ -7,7 +7,7 @@ var tilesArray =[]
 
 const tileScn = preload("res://wave_function_tile.tscn")
 
-
+var traversable = ["plains"]
 const validDirs = [
 	[1,0,0],
 	[-1,0,0],
@@ -49,6 +49,8 @@ func _ready():
 				#zArr[z].get_node("MeshInstance3D").themes = {"desert":x, "woods":(bounds[0]-x)}
 				#zArr[z].get_node("MeshInstance3D").themes = {"scrub":x, "desert":(bounds[0]-x)}
 				
+				#
+				
 				#if x>12:
 				#	zArr[z].get_node("MeshInstance3D").themes =  {"woods":x}
 				#else:
@@ -71,8 +73,8 @@ func _ready():
 						if zArr[z].get_node("MeshInstance3D").themes.has(theme):
 							
 							#and is the possible tile in said theme
-							print(tileType)
-							print(themeData[theme]["valid_tiles"])
+							#print(tileType)
+							#print(themeData[theme]["valid_tiles"])
 							if tileType in themeData[theme]["valid_tiles"]:
 								#then we allow it
 								valid = true
@@ -88,7 +90,46 @@ func _ready():
 			yArr.append(zArr)
 		tilesArray.append(yArr)
 	
+	#
 	
+	
+	#make a predefined preset traversable path through the map 
+	for x in range(tilesArray.size()):		
+		for y in range(tilesArray[x].size()):			
+			for z in range(tilesArray[x][y].size()):
+				
+				#hard coded path				
+				if z == x or z == x+1:
+					
+					var removeList = []
+					for p in tilesArray[x][y][z].get_node("MeshInstance3D").possibilities:
+						if not(p in traversable):							
+							removeList.append(p)
+							
+						
+					for p in tilesArray[x][y][z].get_node("MeshInstance3D").possibilities:
+						if p in removeList:
+							tilesArray[x][y][z].get_node("MeshInstance3D").possibilities.pop_at(
+								tilesArray[x][y][z].get_node("MeshInstance3D").possibilities.find(p)
+								)
+								
+					#do it again, very bad coding, but it works if i do this
+					for p in tilesArray[x][y][z].get_node("MeshInstance3D").possibilities:
+						if p in removeList:
+							tilesArray[x][y][z].get_node("MeshInstance3D").possibilities.pop_at(
+								tilesArray[x][y][z].get_node("MeshInstance3D").possibilities.find(p)
+								)
+					
+					print(tilesArray[x][y][z].get_node("MeshInstance3D").possibilities)
+					#force to be plains 
+					#tilesArray[x][y][z].get_node("MeshInstance3D").possibilities = ["plains"]
+							
+					
+					
+	
+	
+	
+	#loop over wfc to generate the map
 	wfc()
 	
 	
@@ -284,7 +325,7 @@ func wfc_iterate():
 				for i in range(len(currentOffTile.get_node("MeshInstance3D").possibilities)):
 					if not(currentOffTile.get_node("MeshInstance3D").possibilities[i+changeCalibration] in possibleNeighbours):
 						
-						print("deleted " , currentOffTile.get_node("MeshInstance3D").possibilities[i+changeCalibration])
+						#print("deleted " , currentOffTile.get_node("MeshInstance3D").possibilities[i+changeCalibration])
 						
 						currentOffTile.get_node("MeshInstance3D").possibilities.pop_at(i+changeCalibration)
 						changed = true
