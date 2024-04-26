@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://by6l8qspeykjm"]
+[gd_scene load_steps=3 format=3 uid="uid://d02aq1wls7gk6"]
 
-[ext_resource type="Script" path="res://wfc.gd" id="1_nfwt2"]
+[ext_resource type="Script" path="res://wfc.gd" id="1_pkmng"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_dml67"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Node" type="Node" parent="."]
-script = ExtResource("1_nfwt2")
+script = ExtResource("1_pkmng")
 
-[node name="origin" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.273625, 0, 0, 0, 4.73812, 0, 0, 0, 0.341143, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_dml67")
 skeleton = NodePath("../visualiastion/Camera3D")
@@ -18,7 +18,7 @@ skeleton = NodePath("../visualiastion/Camera3D")
 transform = Transform3D(1, 0, 0, 0, 0.999379, 0.0352312, 0, -0.0352312, 0.999379, 14.4831, 3.01217, 5.96215)
 
 [node name="Camera3D" type="Camera3D" parent="visualiastion"]
-transform = Transform3D(1, 0, 0, 0, 0.890444, 0.455094, 0, -0.455094, 0.890444, -1.68495, 6.15537, 22.249)
+transform = Transform3D(-0.751241, 0.320894, -0.57677, -0.0232536, 0.860447, 0.509009, 0.659618, 0.395801, -0.638941, -17.3946, 7.18667, -7.00518)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="visualiastion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71773, 0.641044, -7.05648)

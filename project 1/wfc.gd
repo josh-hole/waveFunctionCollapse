@@ -18,6 +18,13 @@ const validDirs = [
 ]
 
 const bounds=[24,1,24]
+#const bounds=[50,1,38]
+#const bounds=[100,1,100]
+
+
+
+var time = 0.0
+var canDoneAlert = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -54,7 +61,7 @@ func _ready():
 				#if x>12:
 				#	zArr[z].get_node("MeshInstance3D").themes =  {"woods":x}
 				#else:
-				#	zArr[z].get_node("MeshInstance3D").themes =  {"desert":(bounds[0]-x)}
+				#	zArr[z].get_node("MeshInstance3D").themes =  {"scrub":(bounds[0]-x)}
 				
 				#add wfc data to tile
 				
@@ -92,14 +99,14 @@ func _ready():
 	
 	#
 	
-	
+	const hardCodePath = true
 	#make a predefined preset traversable path through the map 
 	for x in range(tilesArray.size()):		
 		for y in range(tilesArray[x].size()):			
 			for z in range(tilesArray[x][y].size()):
 				
 				#hard coded path				
-				if z == x or z == x+1:
+				if (z == x or z == x+1)and hardCodePath:
 					
 					var removeList = []
 					for p in tilesArray[x][y][z].get_node("MeshInstance3D").possibilities:
@@ -120,7 +127,7 @@ func _ready():
 								tilesArray[x][y][z].get_node("MeshInstance3D").possibilities.find(p)
 								)
 					
-					print(tilesArray[x][y][z].get_node("MeshInstance3D").possibilities)
+					#print(tilesArray[x][y][z].get_node("MeshInstance3D").possibilities)
 					#force to be plains 
 					#tilesArray[x][y][z].get_node("MeshInstance3D").possibilities = ["plains"]
 							
@@ -176,6 +183,7 @@ func wfc():
 
 func wfc_iterate():
 	
+	
 	##find tile with lowest entropy
 	var lowest = 999999999999 # dont have support for 1 trillion tile types untill I un-hard code this...
 	var lowestPos = []
@@ -226,7 +234,7 @@ func wfc_iterate():
 		if totalWeight !=0:
 			
 			var randomIndex = randi()%int(totalWeight)
-			print (randomIndex)
+			#print (randomIndex)
 			
 			
 			var collapsedOutcome = null# = meshInstance.possibilities[randomID]
@@ -241,7 +249,7 @@ func wfc_iterate():
 				randomIndex -= tilesData[p]["weight"]*themeWeight#TODO: multiply weights by the weight of all themes they are in
 				if randomIndex < 0:
 					collapsedOutcome = p
-					print (p)
+					#print (p)
 					break
 					
 				
@@ -356,14 +364,19 @@ func wfc_iterate():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	time += delta
+	
 	
 	
 	var wfc_done = false
-	while !wfc_done:
+	#while !wfc_done:
+	if !wfc_done:
 		wfc_done = wfc_iterate()
 	
 	
-	
-	
-	
-	
+	if wfc_done and canDoneAlert:
+		canDoneAlert = false
+		print("--- Generation Complete! ---")
+		print("time elapsed: ", round(time*1000.0)/1000.0 , "s")
+		print("grid size:", bounds[0] ,"x",bounds[1] ,"x",bounds[2] )
+

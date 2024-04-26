@@ -20,7 +20,7 @@
 		},
 		"scrub":{
 			
-			"valid_tiles":["sand","scrub"],
+			"valid_tiles":["sand","shrub"],
 			
 		},
 		
